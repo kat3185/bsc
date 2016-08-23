@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :event_volunteers
-  has_many :events, through: :event_volunteers
+  has_many :event_volunteer_slots, through: :event_volunteers
+  # has_many :events, through: :event_volunteers
 end

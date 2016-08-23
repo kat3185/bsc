@@ -48,9 +48,30 @@ Price.create!(general: 15, student: 13, discounted: 8)
 Price.create!(general: 10, student: 10, discounted: 5)
 puts 'Created Prices!'
 
-Event.create!(band_id: 1, venue_id: 1, price_id: 1, start_time: Time.now)
 Event.create!(band_id: 1, venue_id: 2, price_id: 2, start_time: Time.now)
 puts 'Created Events!'
 
-EventVolunteer.create!(user_id: 1, event_id: 1, role_id: 2, start_time: Time.now, end_time: Time.now)
-puts 'Create Event Volunteers!'
+band = Band.first
+venue = Venue.first
+price = Price.first
+date = Chronic.parse('this friday 7:15 PM')
+event = Event.new(band: band, venue: venue, price: price, start_time: date)
+event.save!
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + 60 * 60)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + 60 * 60)
+
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 60, end_time: event.start_time + 60 * 120)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 60, end_time: event.start_time + 60 * 120)
+
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 120, end_time: event.start_time + 60 * 180)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 120, end_time: event.start_time + 60 * 180)
+
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 180, end_time: event.start_time + 60 * 240)
+
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 255, end_time: event.start_time + 60 * 315)
+
+puts "Created Event Volunteer Slots"
+
+EventVolunteer.create!(user_id: 1, event_volunteer_slot_id: 1)
+# EventVolunteer.create!(user_id: 1, event_id: 1, role_id: 2, start_time: Time.now, end_time: Time.now)
+# puts 'Create Event Volunteers!'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_volunteer_slots
   resources :event_volunteers
   resources :events
   resources :prices
