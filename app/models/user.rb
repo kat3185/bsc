@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :event_volunteers
   has_many :event_volunteer_slots, through: :event_volunteers
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

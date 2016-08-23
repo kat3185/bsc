@@ -1,21 +1,36 @@
 user = User.new
 user.email = 'ken@bsc.com'
 user.password = 'qwerty'
+user.first_name = "Ken"
+user.last_name = "Thomas"
+user.save!
+
+user = User.new
+user.email = 'sarah@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Sarah"
+user.last_name = "Getter"
 user.save!
 
 user = User.new
 user.email = 'mike@bostonswingcentral.com'
 user.password = 'qwerty'
+user.first_name = "Mike"
+user.last_name = "Hibarger"
 user.save!
 
 user = User.new
 user.email = 'dangmai@bsc.com'
 user.password = 'qwerty'
+user.first_name = "Dang"
+user.last_name = "Mai"
 user.save!
 
 user = User.new
 user.email = 'cassie@bsc.com'
 user.password = 'qwerty'
+user.first_name = "Cassie"
+user.last_name = "Filios"
 user.save!
 puts 'Created Users!'
 
@@ -54,7 +69,18 @@ event.save!
 def hours(n)
   (60 * 60 * n).to_i
 end
+#House Manager and Sound Manager
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "House Manager").first, start_time: event.start_time, end_time: event.end_time)
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Sound Manager").first, start_time: event.start_time, end_time: event.end_time)
+
+#DJ
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "DJ").first, start_time: event.start_time + hours(1.75), end_time: event.end_time)
+
+#Instructors
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
 #Desk Volunteers
+
 EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + hours(1))
 EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + hours(1))
 
@@ -67,17 +93,6 @@ EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.sta
 EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(3), end_time: event.start_time + hours(4))
 
 EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(4.25), end_time: event.end_time)
-
-#House Manager and Sound Manager
-EventVolunteerSlot.create!(event: event, role: Role.where(name: "House Manager").first, start_time: event.start_time, end_time: event.end_time)
-EventVolunteerSlot.create!(event: event, role: Role.where(name: "Sound Manager").first, start_time: event.start_time, end_time: event.end_time)
-
-#DJ
-EventVolunteerSlot.create!(event: event, role: Role.where(name: "DJ").first, start_time: event.start_time + hours(1.75), end_time: event.end_time)
-
-#Instructors
-EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
-EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
 
 #Angels
 EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Lead")
