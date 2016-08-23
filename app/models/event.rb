@@ -5,5 +5,4 @@ class Event < ApplicationRecord
 
   has_many :event_volunteer_slots
   has_many :event_volunteers, through: :event_volunteer_slots
-  # has_many :users, through: :event_volunteers
 end

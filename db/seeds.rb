@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 user = User.new
 user.email = 'ken@bsc.com'
 user.password = 'qwerty'
@@ -54,24 +47,46 @@ puts 'Created Events!'
 band = Band.first
 venue = Venue.first
 price = Price.first
-date = Chronic.parse('this friday 7:15 PM')
-event = Event.new(band: band, venue: venue, price: price, start_time: date)
+start_time = Chronic.parse('this friday 7:15 PM')
+end_time = Chronic.parse('this saturday at 12:30 AM')
+event = Event.new(band: band, venue: venue, price: price, start_time: start_time, end_time: end_time)
 event.save!
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + 60 * 60)
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + 60 * 60)
+def hours(n)
+  (60 * 60 * n).to_i
+end
+#Desk Volunteers
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + hours(1))
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time, end_time: event.start_time + hours(1))
 
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 60, end_time: event.start_time + 60 * 120)
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 60, end_time: event.start_time + 60 * 120)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(1), end_time: event.start_time + hours(2))
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(1), end_time: event.start_time + hours(2))
 
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 120, end_time: event.start_time + 60 * 180)
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 120, end_time: event.start_time + 60 * 180)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(2), end_time: event.start_time + hours(3))
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(2), end_time: event.start_time + hours(3))
 
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 180, end_time: event.start_time + 60 * 240)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(3), end_time: event.start_time + hours(4))
 
-EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + 60 * 255, end_time: event.start_time + 60 * 315)
+EventVolunteerSlot.create!(event: event, role: Role.first, start_time: event.start_time + hours(4.25), end_time: event.end_time)
 
+#House Manager and Sound Manager
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "House Manager").first, start_time: event.start_time, end_time: event.end_time)
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Sound Manager").first, start_time: event.start_time, end_time: event.end_time)
+
+#DJ
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "DJ").first, start_time: event.start_time + hours(1.75), end_time: event.end_time)
+
+#Instructors
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Instructor").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(1.75))
+
+#Angels
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Lead")
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Lead")
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Lead")
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Follow")
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Follow")
+EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Follow")
 puts "Created Event Volunteer Slots"
 
 EventVolunteer.create!(user_id: 1, event_volunteer_slot_id: 1)
-# EventVolunteer.create!(user_id: 1, event_id: 1, role_id: 2, start_time: Time.now, end_time: Time.now)
-# puts 'Create Event Volunteers!'
+puts 'Create Event Volunteers!'
