@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    alert( "ready!" );
     $(".event-volunteer").change(function() {
       var self = this;
       var userId = self.selectedOptions[0].value;
@@ -10,13 +9,10 @@ $( document ).ready(function() {
       $.ajax({
         method: "POST",
         url: url,
-        data: { event_volunteer: {user_id: userId, event_volunteer_slot_id: eventVolunteerSlotId} }
+        data: { event_volunteer: {user_id: userId, event_volunteer_slot_id: eventVolunteerSlotId} },
+        dataType: "JSON"
       }).done(function(data) {
-        console.log(data);
-      alert( "success" );
-    })
-    .fail(function() {
-      alert( "error" );
+        console.log(data.status);
     });
   });
 });

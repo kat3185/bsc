@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :assign_price, only: [:update]
-  
+
 
   # GET /events
   # GET /events.json
@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event_volunteer_slots = EventVolunteerSlot.where(event: @event)
-    @users = User.all
+    @users = User.all.order(:first_name)
     @venues = Venue.all
     @bands = Band.all
   end

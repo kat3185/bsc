@@ -29,8 +29,9 @@ class EventVolunteersController < ApplicationController
     @event_volunteer = EventVolunteer.new(event_volunteer_params)
     respond_to do |format|
       if @event_volunteer.save
+        @volunteer_status = VolunteerStatus.new("Success")
         format.html { redirect_to @event_volunteer, notice: 'Event volunteer was successfully created.' }
-        format.json { render :show, status: :created, location: @event_volunteer }
+        format.json { render json: @volunteer_status }
       else
         format.html { render :new }
         format.json { render json: @event_volunteer.errors, status: :unprocessable_entity }
@@ -72,4 +73,5 @@ class EventVolunteersController < ApplicationController
     def event_volunteer_params
       params.fetch(:event_volunteer, {}).permit(:user_id, :event_volunteer_slot_id)
     end
+    VolunteerStatus = Struct.new(:status)
 end
