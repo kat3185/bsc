@@ -38,6 +38,7 @@ Venue.create!(name: 'Extreme DanceSport')
 Venue.create!(name: 'The Whistle Stop')
 puts 'Created Venues!'
 
+Band.create!(name: 'DJ')
 Band.create!(name: 'Gordon Webster and Friends')
 Band.create!(name: 'Naomi and Her Handsome Devils')
 puts 'Created Bands!'

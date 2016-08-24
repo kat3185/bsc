@@ -3,27 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Event - <%= @event.start_time.strftime("%A: %I:%M%p") %> - <%= @event.end_time.strftime("%I:%M%p")%></h1>
-<table>
-  <thead>
-    <tr>
-      <th>Venue</th>
-      <th>Band</th>
-      <th>General Admission</th>
-      <th>Student Admission</th>
-      <th>Discounted Admission</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= collection_select :event, :venue_id, @venues, :id, :name, selected: @event.venue.id %></td>
-      <td><%= collection_select :event, :band_id, @bands, :id, :name, selected: @event.band.id %></td>
-      <td><%= text_field_tag :event, :general_price, value: @event.price.general %></td>
-      <td><%= text_field_tag :event, :student_price, value: @event.price.student %></td>
-      <td><%= text_field_tag :event, :discounted_price, value: @event.price.discounted %></td>
-    </tr>
-  </tbody>
-</table>
+<%= render 'form', event: @event %>
 <table>
   <thead>
     <tr>
@@ -52,7 +32,7 @@
 <%= link_to 'Back', events_path %>
 
 
-<%= render 'form', event: @event %>
+
 
 <%= link_to 'Show', @event %> |
 <%= link_to 'Back', events_path %>

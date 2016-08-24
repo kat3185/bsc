@@ -36,11 +36,8 @@ class EventsController < ApplicationController
     price = Price.find_or_create_by(general: price_params[:price_attributes][:general], student: price_params[:price_attributes][:student], discounted: price_params[:price_attributes][:discounted])
     @event.price = price
 
-    binding.pry
-
     respond_to do |format|
-      if @event.save
-        @event.create_volunteer_slots
+      if @event.save && create_friday_volunteer_slots
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -87,5 +84,9 @@ class EventsController < ApplicationController
 
     def price_params
       params.fetch(:event).permit(price_attributes: [:general, :student, :discounted])
+    end
+
+    def create_friday_volunteer_slots
+      @event.weekly_friday_dance ? EventVolunteerSlot.create_friday_volunteer_slots(@event) : true
     end
 end
