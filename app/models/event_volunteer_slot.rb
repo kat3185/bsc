@@ -2,7 +2,7 @@ class EventVolunteerSlot < ApplicationRecord
   belongs_to :event
   belongs_to :role
 
-  has_one :event_volunteer
+  has_one :event_volunteer, dependent: :destroy
 
   def display_volunteer
     event_volunteer = EventVolunteer.where(event_volunteer_slot_id: id).first

@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.text :notes
       t.datetime :start_time, null: false
       t.datetime :end_time
+      t.boolean :weekly_friday_dance, null: false, default: true
 
       t.integer :venue_id, null: false
       t.integer :band_id

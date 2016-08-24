@@ -16,7 +16,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    @event = Event.new(start_time: Chronic.parse('this friday 7:15 PM'), end_time: Chronic.parse('this saturday 12:30 AM'))
     @venues = Venue.all
     @bands = Band.all
   end
@@ -32,11 +32,15 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    binding.pry
     @event = Event.new(event_params)
+    price = Price.find_or_create_by(general: price_params[:price_attributes][:general], student: price_params[:price_attributes][:student], discounted: price_params[:price_attributes][:discounted])
+    @event.price = price
+
+    binding.pry
 
     respond_to do |format|
       if @event.save
+        @event.create_volunteer_slots
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -78,6 +82,10 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.fetch(:event, {})
+      params.fetch(:event).permit(:band_id, :venue_id, :start_time, :end_time, :notes, :weekly_friday_dance)
+    end
+
+    def price_params
+      params.fetch(:event).permit(price_attributes: [:general, :student, :discounted])
     end
 end
