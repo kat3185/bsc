@@ -17,6 +17,8 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @venues = Venue.all
+    @bands = Band.all
   end
 
   # GET /events/1/edit
@@ -30,6 +32,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    binding.pry
     @event = Event.new(event_params)
 
     respond_to do |format|

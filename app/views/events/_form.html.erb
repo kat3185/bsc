@@ -11,6 +11,37 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.datetime_select :start_time, :ampm => true, :minute_step => 15 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :band %>
+    <%= f.collection_select :band_id, @bands, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :venue %>
+    <%= f.collection_select :venue_id, @venues, :id, :name, include_blank: true %>
+  </div>
+
+  <%= f.fields_for :price do |price| %>
+    <div class="field">
+      <%= price.label :general %><br />
+      <%= price.text_field :general, value: 15 %>
+    </div>
+
+    <div class="field">
+      <%= price.label :student %><br />
+      <%= price.text_field :student, value: 13 %>
+    </div>
+
+    <div class="field">
+      <%= price.label :discounted %><br />
+      <%= price.text_field :discounted, value: 8 %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
