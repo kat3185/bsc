@@ -23,7 +23,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event_volunteer_slots = EventVolunteerSlot.where(event_id: params[:id])
+    @event_volunteer_slots = EventVolunteerSlot.where(event: @event)
     @users = User.all
     @venues = Venue.all
     @bands = Band.all
