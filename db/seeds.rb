@@ -32,6 +32,41 @@ user.password = 'qwerty'
 user.first_name = "Cassie"
 user.last_name = "Filios"
 user.save!
+
+user = User.new
+user.email = 'kevin@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Kevin"
+user.last_name = "Lin"
+user.save!
+
+user = User.new
+user.email = 'kayla@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Kayla"
+user.last_name = "Dreyfuss"
+user.save!
+
+user = User.new
+user.email = 'chrystal@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Chrystal"
+user.last_name = "Lloyd"
+user.save!
+
+user = User.new
+user.email = 'natalie@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Natalie"
+user.last_name = "Eringos"
+user.save!
+
+user = User.new
+user.email = 'katie@bsc.com'
+user.password = 'qwerty'
+user.first_name = "Katie"
+user.last_name = "Piscelli"
+user.save!
 puts 'Created Users!'
 
 Venue.create!(name: 'Extreme DanceSport')
@@ -54,7 +89,7 @@ Role.create!(name: 'Sound Manager')
 puts 'Created Roles!'
 
 Price.create!(general: 15, student: 13, discounted: 8)
-Price.create!(general: 10, student: 10, discounted: 5)
+Price.create!(general: 10, student: 8, discounted: 5)
 puts 'Created Prices!'
 
 Event.create!(band_id: 1, venue_id: 2, price_id: 2, start_time: Time.now)
@@ -62,7 +97,7 @@ puts 'Created Events!'
 
 band = Band.first
 venue = Venue.first
-price = Price.first
+price = Price.last
 start_time = Chronic.parse('this friday 7:15 PM')
 end_time = Chronic.parse('this saturday at 12:30 AM')
 event = Event.new(band: band, venue: venue, price: price, start_time: start_time, end_time: end_time)

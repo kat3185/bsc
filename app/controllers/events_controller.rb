@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :assign_price, only: [:update]
+  
 
   # GET /events
   # GET /events.json
@@ -33,8 +35,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    price = Price.find_or_create_by(general: price_params[:price_attributes][:general], student: price_params[:price_attributes][:student], discounted: price_params[:price_attributes][:discounted])
-    @event.price = price
+    assign_price
 
     respond_to do |format|
       if @event.save && create_friday_volunteer_slots
@@ -77,6 +78,11 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
+    def assign_price
+      price = Price.find_or_create_by(general: price_params[:price_attributes][:general], student: price_params[:price_attributes][:student], discounted: price_params[:price_attributes][:discounted])
+      @event.price = price
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.fetch(:event).permit(:band_id, :venue_id, :start_time, :end_time, :notes, :weekly_friday_dance)
@@ -89,4 +95,5 @@ class EventsController < ApplicationController
     def create_friday_volunteer_slots
       @event.weekly_friday_dance ? EventVolunteerSlot.create_friday_volunteer_slots(@event) : true
     end
+
 end

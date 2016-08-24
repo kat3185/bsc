@@ -15,6 +15,18 @@ class Event < ApplicationRecord
   def is_djed?
     band.name == "DJ"
   end
+
+  def general_price
+    price.nil? ? 15 : price.general
+  end
+
+  def student_price
+    price.nil? ? 10 : price.student
+  end
+
+  def discounted_price
+    price.nil? ? 8 : price.discounted
+  end
 end
 
 class Time

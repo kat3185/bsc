@@ -1,6 +1,6 @@
 class EventVolunteerSlotsController < ApplicationController
   before_action :set_event_volunteer_slot, only: [:show, :edit, :update, :destroy]
-
+  binding.pry
   # GET /event_volunteer_slots
   # GET /event_volunteer_slots.json
   def index
@@ -69,6 +69,6 @@ class EventVolunteerSlotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_volunteer_slot_params
-      params.fetch(:event_volunteer_slot, {})
+      params.fetch(:event_volunteer_slot, {}).permit(:user_id)
     end
 end

@@ -24,8 +24,9 @@ class EventVolunteersController < ApplicationController
   # POST /event_volunteers
   # POST /event_volunteers.json
   def create
+    existing_slots = EventVolunteer.where(event_volunteer_slot_id: event_volunteer_params[:event_volunteer_slot_id])
+    existing_slots.each { |slot| slot.destroy } if !existing_slots.empty?
     @event_volunteer = EventVolunteer.new(event_volunteer_params)
-
     respond_to do |format|
       if @event_volunteer.save
         format.html { redirect_to @event_volunteer, notice: 'Event volunteer was successfully created.' }
@@ -69,6 +70,6 @@ class EventVolunteersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_volunteer_params
-      params.fetch(:event_volunteer, {})
+      params.fetch(:event_volunteer, {}).permit(:user_id, :event_volunteer_slot_id)
     end
 end

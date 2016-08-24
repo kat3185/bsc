@@ -19,7 +19,7 @@
     <% @event_volunteer_slots.each do |slot| %>
       <tr>
         <td><%= slot.role.name %></td>
-        <td><%= collection_select :event_volunteer_slot, :user_id, @users, :id, :full_name, include_blank: true, selected: slot.volunteer_id %></td>
+        <td><%= collection_select :event_volunteer_slot, :user_id, @users, :id, :full_name, {include_blank: true, selected: slot.volunteer_id}, {class: "event-volunteer", id: slot.id} %></td>
         <td><%= slot.start_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.end_time.strftime("%I:%M%p")  %></td>
         <td><%= text_field_tag :event_volunteer_slot, :notes, value: slot.notes %></td>

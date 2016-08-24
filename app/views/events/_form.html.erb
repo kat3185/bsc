@@ -38,17 +38,17 @@
   <div class="field">
       <div class="fieldling">
         <%= price.label :general %><br />
-        <%= price.text_field :general, value: 15 %>
+        <%= price.text_field :general, value: (event.general_price) %>
       </div>
 
       <div class="fieldling">
         <%= price.label :student %><br />
-        <%= price.text_field :student, value: 13 %>
+        <%= price.text_field :student, value: (event.student_price) %>
       </div>
 
       <div class="fieldling">
         <%= price.label :discounted %><br />
-        <%= price.text_field :discounted, value: 8 %>
+        <%= price.text_field :discounted, value: (event.discounted_price) %>
       </div>
     </div>
   <% end %>
@@ -64,7 +64,7 @@
       <%= f.check_box :weekly_friday_dance %>
     </div>
   </div>
-  
+
   <div class="actions">
     <%= f.submit %>
   </div>
