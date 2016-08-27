@@ -13,4 +13,8 @@ class Role < ApplicationRecord
   def user_names
     users.map { |user| user.full_name }
   end
+
+  def self.volunteer
+    Role.where(name: "Volunteer").first
+  end
 end
