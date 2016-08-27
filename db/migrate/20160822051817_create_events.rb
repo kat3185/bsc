@@ -6,9 +6,9 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.datetime :end_time
       t.boolean :weekly_friday_dance, null: false, default: true
 
-      t.integer :venue_id, null: false
+      t.integer :venue_id
       t.integer :band_id
-      t.integer :price_id, null: false
+      t.integer :price_id, null: false, default: 1
 
       t.timestamps
     end

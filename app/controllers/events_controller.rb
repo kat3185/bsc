@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :assign_price, only: [:update]
+  before_action :authenticate_user!
 
 
   # GET /events
