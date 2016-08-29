@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :bands
   resources :venues
+  resources :users, only: [:index, :show]
   root 'events#index'
   devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
