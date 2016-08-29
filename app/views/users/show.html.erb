@@ -1,4 +1,4 @@
-<div class="medium-6 callout columns">
+<div class="medium-5 callout columns">
   <div class="callout">
     <h4>
       <%= @user.full_name %><br>
@@ -25,7 +25,7 @@
     <% @user.roles_ordered_by_name.each do |role| %>
       <div class="role callout input-group">
         <span class="text-left"><%= role.name %></span>
-        <span class="input-group-button"><%= button_to 'Remove Role', user_role_path(user_role: {role_id: role, user_id: @user}), method: :delete, class: "button right" %></span>
+        <span class="input-group-button"><%= button_to 'Remove Role', user_role_path(user_role: {role_id: role, user_id: @user}), method: :delete, class: "button" %></span>
       </div>
     <%end%>
   </div>

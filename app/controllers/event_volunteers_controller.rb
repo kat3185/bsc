@@ -4,7 +4,7 @@ class EventVolunteersController < ApplicationController
   # GET /event_volunteers
   # GET /event_volunteers.json
   def index
-    @event_volunteers = EventVolunteer.all
+    @event_volunteers = EventVolunteer.where(user: current_user)
   end
 
   # GET /event_volunteers/1
