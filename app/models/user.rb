@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def add_volunteer_as_role
     UserRole.add_as_volunteer(self) if self.roles.empty?
   end
+
+  def roles_ordered_by_name
+    roles.sort { |a,b| a.name.downcase <=> b.name.downcase }
+  end
 end

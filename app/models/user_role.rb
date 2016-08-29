@@ -1,4 +1,7 @@
 class UserRole < ApplicationRecord
+  validates :role, uniqueness: { scope: :user,
+  message: ' already exists for this user!' }
+
   belongs_to :user
   belongs_to :role
 

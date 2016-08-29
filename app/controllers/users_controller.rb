@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user_role = UserRole.new
-    @roles = Role.all
+    @roles = Role.all.order(:name)
+    @errors = params[:errors] ? params[:errors] : []
   end
 
   # GET /users/1/edit

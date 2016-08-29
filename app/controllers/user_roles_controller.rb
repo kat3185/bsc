@@ -32,7 +32,7 @@ class UserRolesController < ApplicationController
         format.html { redirect_to user_path(@user_role.user_id), notice: 'User role was successfully created.' }
         format.json { render :show, status: :created, location: @user_role }
       else
-        format.html { render :new }
+        format.html { redirect_to user_path @user_role.user_id, errors: @user_role.errors.messages }
         format.json { render json: @user_role.errors, status: :unprocessable_entity }
       end
     end
