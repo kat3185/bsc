@@ -1,0 +1,20 @@
+<div>
+  <h4>
+    <%= @user.full_name %><br>
+    <%= @user.email %><br>
+  </h4>
+</div>
+
+<div class="roles">
+  <h6><%=@user.first_name%>'s Roles: <br></h6>
+  <% @user.roles.each do |role| %>
+    <div class="role">
+      <%= role.name %> <%= button_to "Remove Role", user_role_path(user_role: {role_id: role, user_id: @user}), method: :delete %>
+    </div>
+  <%end%>
+</div>
+<%= form_for @user_role do |f| %>
+  <%= f.hidden_field :user_id, :value => @user.id %>
+  <%= collection_select(:user_role, :role_id, @roles, :id, :name) %>
+  <%= f.submit %>
+<% end %>

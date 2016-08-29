@@ -1,5 +1,6 @@
 class UserRolesController < ApplicationController
-  before_action :set_user_role, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_role, only: [:show, :edit, :update]
+  before_action :set_user_roles, only: [:destroy]
 
   # GET /user_roles
   # GET /user_roles.json
@@ -28,7 +29,7 @@ class UserRolesController < ApplicationController
 
     respond_to do |format|
       if @user_role.save
-        format.html { redirect_to @user_role, notice: 'User role was successfully created.' }
+        format.html { redirect_to user_path(@user_role.user_id), notice: 'User role was successfully created.' }
         format.json { render :show, status: :created, location: @user_role }
       else
         format.html { render :new }
@@ -54,17 +55,23 @@ class UserRolesController < ApplicationController
   # DELETE /user_roles/1
   # DELETE /user_roles/1.json
   def destroy
-    @user_role.destroy
+    @user_roles.map(&:destroy)
     respond_to do |format|
-      format.html { redirect_to user_roles_url, notice: 'User role was successfully destroyed.' }
+      format.html { redirect_to user_path(first_user), notice: 'User role was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_user_roles
+      @user_roles = UserRole.where(user_id: user_role_params[:user_id], role_id: user_role_params[:role_id])
+    end
     def set_user_role
       @user_role = UserRole.find(params[:id])
+    end
+    def first_user
+      @user_roles.first.user_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
