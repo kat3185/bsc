@@ -63,3 +63,15 @@ As an Administrator
 I want Friday dances to exist for the next year
 So that I can enter information
 ```
+
+```
+As an Administrator
+I want to be able to see a list of users, with an option to filter by volunteer role
+So I can see user details
+```
+
+```
+As an Administrator
+I want to be able to see a user's details and a role
+So people can take on new roles.
+```
