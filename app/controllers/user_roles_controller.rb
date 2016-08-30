@@ -5,16 +5,13 @@ class UserRolesController < ApplicationController
   # GET /user_roles
   # GET /user_roles.json
   def index
-    @user = current_user
-    @user_role = UserRole.new
-    @roles = Role.all.order(:name)
-    @errors = params[:errors] ? params[:errors] : []
+    @users = User.all
   end
 
   # GET /user_roles/1
   # GET /user_roles/1.json
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @user_role = UserRole.new
     @roles = Role.all.order(:name)
     @errors = params[:errors] ? params[:errors] : []

@@ -3,7 +3,6 @@ class EventsController < ApplicationController
   before_action :assign_price, only: [:update]
   before_action :authenticate_user!
 
-
   # GET /events
   # GET /events.json
   def index

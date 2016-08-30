@@ -13,6 +13,7 @@ class UserInformationsController < ApplicationController
     @user_role = UserRole.new
     @roles = Role.all.order(:name)
     @errors = params[:errors] ? params[:errors] : []
+    binding.pry
   end
 
   # GET /users/1/edit
