@@ -16,9 +16,12 @@ user.password = 'qwerty'
 user.first_name = "Ken"
 user.last_name = "Thomas"
 user.save!
+puts "first"
 
 UserRole.create!(user: user, role: volunteer)
+puts "second"
 UserRole.create!(user: user, role: house_manager)
+puts "third"
 UserRole.create!(user: user, role: admin)
 UserRole.create!(user: user, role: instructor)
 UserRole.create!(user: user, role: angel)
