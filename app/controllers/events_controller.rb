@@ -12,11 +12,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event_volunteer_slots = EventVolunteerSlot.where(event_id: params[:id])
+    @event_volunteer_slots = EventVolunteerSlot.joins('LEFT JOIN event_slot_availabilities on event_volunteer_slots.id = event_slot_availabilities.event_volunteer_slot_id').where(event_id: params[:id], event_slot_availabilities: {event_volunteer_slot_id: nil})
     @event_volunteer_slots = @event_volunteer_slots.select{ |slot| current_user.roles.include?(slot.role) }
     @users = User.all
   end
-
   # GET /events/new
   def new
     @event = Event.new(start_time: Chronic.parse('this friday 7:15 PM'), end_time: Chronic.parse('this saturday 12:30 AM'))

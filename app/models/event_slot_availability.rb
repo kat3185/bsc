@@ -1,6 +1,6 @@
 class EventSlotAvailabilityValidator < ActiveModel::Validator
   def validate(slot)
-    if EventSlotAvailability.where(user: slot.user, role: slot.event_volunteer_slot).length > 0
+    if EventSlotAvailability.where(user: slot.user, event_volunteer_slot: slot.event_volunteer_slot).length > 0
       slot.errors[:id] << 'Event Slot Availablity must be unique!'
     end
   end

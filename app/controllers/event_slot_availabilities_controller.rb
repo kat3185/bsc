@@ -32,7 +32,7 @@ class EventSlotAvailabilitiesController < ApplicationController
         format.html { redirect_to event_path(@event_slot_availability.event), notice: 'Event volunteer slot availability was successfully created.' }
         format.json { render :show, status: :created, location: @event_slot_availability }
       else
-        format.html { render :new }
+        format.html { redirect_to event_path(@event_slot_availability.event), error: 'Availability not recorded.'}
         format.json { render json: @event_slot_availability.errors, status: :unprocessable_entity }
       end
     end
