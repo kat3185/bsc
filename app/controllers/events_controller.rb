@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event_volunteer_slots = EventVolunteerSlot.where(event_id: params[:id])
+    @event_volunteer_slots = @event_volunteer_slots.select{ |slot| current_user.roles.include?(slot.role) }
     @users = User.all
   end
 

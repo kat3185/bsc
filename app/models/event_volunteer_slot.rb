@@ -3,6 +3,7 @@ class EventVolunteerSlot < ApplicationRecord
   belongs_to :role
 
   has_one :event_volunteer, dependent: :destroy
+  has_many :event_volunteer_slot_availabilities
 
   def display_volunteer
     event_volunteer = EventVolunteer.where(event_volunteer_slot_id: id).first
@@ -23,8 +24,6 @@ class EventVolunteerSlot < ApplicationRecord
 
     #DJ
     EventVolunteerSlot.create!(event: event, role: roles["DJ"], start_time: event.hours_after_start(1.75), end_time: event.end_time)
-    EventVolunteerSlot.create!(event: event, role: roles["DJ"], start_time: event.hours_after_start(1.75), end_time: event.end_time) if event.is_djed?
-    EventVolunteerSlot.create!(event: event, role: roles["DJ"], start_time: event.hours_after_start(1.75), end_time: event.end_time) if event.is_djed?
 
     #Instructors
     EventVolunteerSlot.create!(event: event, role: roles["Instructor"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(1.75))
@@ -32,12 +31,9 @@ class EventVolunteerSlot < ApplicationRecord
     #Desk Volunteers
 
     EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.start_time, end_time: event.hours_after_start(1))
-    EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.start_time, end_time: event.hours_after_start(1))
 
     EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.hours_after_start(1), end_time: event.hours_after_start(2))
-    EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.hours_after_start(1), end_time: event.hours_after_start(2))
 
-    EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.hours_after_start(2), end_time: event.hours_after_start(3))
     EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.hours_after_start(2), end_time: event.hours_after_start(3))
 
     EventVolunteerSlot.create!(event: event, role: roles["Desk Volunteer"], start_time: event.hours_after_start(3), end_time: event.hours_after_start(4))
@@ -46,10 +42,5 @@ class EventVolunteerSlot < ApplicationRecord
 
     #Angels
     EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Lead")
-    EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Lead")
-    EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Lead")
-    EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Follow")
-    EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Follow")
-    EventVolunteerSlot.create!(event: event, role: roles["Angel"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(2.25), notes: "Follow")
   end
 end

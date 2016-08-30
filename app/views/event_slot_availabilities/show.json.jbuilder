@@ -1,0 +1,1 @@
+json.partial! "event_volunteer_slot_availabilities/event_volunteer_slot_availability", event_volunteer_slot_availability: @event_volunteer_slot_availability

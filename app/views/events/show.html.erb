@@ -30,6 +30,7 @@
       <th>Start Time</th>
       <th>End Time</th>
       <th>Notes</th>
+      <th>Sign Up</th>
     </tr>
   </thead>
 
@@ -41,6 +42,7 @@
         <td><%= slot.start_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.end_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.notes if !slot.notes.nil? %></td>
+        <td><%= button_to 'Sign up', event_slot_availabilities_path(event_slot_availability: {event_volunteer_slot_id: slot.id}), method: :post, class: "button" %></td>
 
       </tr>
     <% end %>

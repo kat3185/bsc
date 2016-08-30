@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Volunteer Slot Availabilities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Event</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_volunteer_slot_availabilities.each do |event_volunteer_slot_availability| %>
+      <tr>
+        <td><%= event_volunteer_slot_availability.user %></td>
+        <td><%= event_volunteer_slot_availability.event %></td>
+        <td><%= link_to 'Show', event_volunteer_slot_availability %></td>
+        <td><%= link_to 'Edit', edit_event_volunteer_slot_availability_path(event_volunteer_slot_availability) %></td>
+        <td><%= link_to 'Destroy', event_volunteer_slot_availability, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Volunteer Slot Availability', new_event_volunteer_slot_availability_path %>

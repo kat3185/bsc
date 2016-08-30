@@ -5,12 +5,19 @@ class UserRolesController < ApplicationController
   # GET /user_roles
   # GET /user_roles.json
   def index
-    @user_roles = UserRole.all
+    @user = current_user
+    @user_role = UserRole.new
+    @roles = Role.all.order(:name)
+    @errors = params[:errors] ? params[:errors] : []
   end
 
   # GET /user_roles/1
   # GET /user_roles/1.json
   def show
+    @user = current_user
+    @user_role = UserRole.new
+    @roles = Role.all.order(:name)
+    @errors = params[:errors] ? params[:errors] : []
   end
 
   # GET /user_roles/new
@@ -29,10 +36,10 @@ class UserRolesController < ApplicationController
 
     respond_to do |format|
       if @user_role.save
-        format.html { redirect_to user_path(@user_role.user_id), notice: 'User role was successfully created.' }
+        format.html { redirect_to user_information_path(@user_role.user_id), notice: 'User role was successfully created.' }
         format.json { render :show, status: :created, location: @user_role }
       else
-        format.html { redirect_to user_path @user_role.user_id, errors: @user_role.errors.messages }
+        format.html { redirect_to user_information_path(@user_role.user_id), errors: @user_role.errors.messages }
         format.json { render json: @user_role.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +64,7 @@ class UserRolesController < ApplicationController
   def destroy
     @user_roles.map(&:destroy)
     respond_to do |format|
-      format.html { redirect_to user_path(first_user), notice: 'User role was successfully destroyed.' }
+      format.html { redirect_to user_information_path(first_user), notice: 'User role was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

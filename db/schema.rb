@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829171735) do
+ActiveRecord::Schema.define(version: 20160829231240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20160829171735) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "event_slot_availabilities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_volunteer_slot_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["event_volunteer_slot_id"], name: "index_event_slot_availabilities_on_event_volunteer_slot_id", using: :btree
+    t.index ["user_id"], name: "index_event_slot_availabilities_on_user_id", using: :btree
   end
 
   create_table "event_volunteer_slots", force: :cascade do |t|
@@ -99,6 +108,8 @@ ActiveRecord::Schema.define(version: 20160829171735) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "event_slot_availabilities", "event_volunteer_slots"
+  add_foreign_key "event_slot_availabilities", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end

@@ -20,6 +20,54 @@
   </tbody>
 </table>
 
+<h1>EVENT VOLUNTEER COMMITMENTS</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Role</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_volunteers.each do |event_volunteer| %>
+      <tr>
+        <td><%= event_volunteer.event_volunteer_slot.start_time.strftime('%B %-d %Y')%></td>
+        <td><%= event_volunteer.event_volunteer_slot.role.name %></td>
+        <td><%= event_volunteer.event_volunteer_slot.start_time.strftime('%I:%M %P')%></td>
+        <td><%= event_volunteer.event_volunteer_slot.end_time.strftime('%I:%M %P')%></td>
+        <td><%= button_to 'Flake', event_volunteer_path(event_volunteer), method: :delete, class: "alert button"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>EVENT VOLUNTEER AVAILABILITY</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Role</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_slot_availabilities.each do |availability| %>
+      <tr>
+        <td><%= availability.event_volunteer_slot.start_time.strftime('%B %-d %Y')%></td>
+        <td><%= availability.event_volunteer_slot.role.name %></td>
+        <td><%= availability.event_volunteer_slot.start_time.strftime('%I:%M %P')%></td>
+        <td><%= availability.event_volunteer_slot.end_time.strftime('%I:%M %P')%></td>
+        <td><%= button_to 'Cancel', event_slot_availability_path(availability), method: :delete, class: "warning button"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
 
 <%= link_to 'New Event Volunteer', new_event_volunteer_path %>

@@ -5,6 +5,8 @@ class EventVolunteersController < ApplicationController
   # GET /event_volunteers.json
   def index
     @event_volunteers = EventVolunteer.where(user: current_user)
+    @event_slot_availabilities = current_user.event_slot_availabilities
+
   end
 
   # GET /event_volunteers/1

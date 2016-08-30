@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @event_volunteer_slot_availability.user %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event_volunteer_slot_availability.event %>
+</p>
+
+<%= link_to 'Edit', edit_event_volunteer_slot_availability_path(@event_volunteer_slot_availability) %> |
+<%= link_to 'Back', event_volunteer_slot_availabilities_path %>

@@ -29,12 +29,15 @@
       </div>
     <%end%>
   </div>
-  <div class="row">
+  <div class="callout">
+    <h6>Add a New Role</h6>
   <%= form_for @user_role do |f| %>
+  <div class="inline-group">
     <%= f.hidden_field :user_id, :value => @user.id %>
-    <%= collection_select(:user_role, :role_id, @roles, :id, :name, class: "medium-12 columns") %>
-    <%= f.submit 'Add User Role', class: 'button medium-4 columns' %>
+    <%= collection_select(:user_role, :role_id, @roles, :id, :name, class: "input-group-field") %>
+    <div class="input-group-button"><%= f.submit 'Add User Role', class: 'button float-right' %></div>
+  </div>
   <% end %>
   </div>
-  <%= link_to 'Back to the Users', users_path %>
+  <%= link_to 'Back to the Users', user_informations_path %>
 </div>

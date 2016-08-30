@@ -1,0 +1,1 @@
+json.array! @event_volunteer_slot_availabilities, partial: 'event_volunteer_slot_availabilities/event_volunteer_slot_availability', as: :event_volunteer_slot_availability
