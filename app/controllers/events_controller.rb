@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event_volunteer_slots = EventVolunteerSlot.joins('LEFT JOIN event_slot_availabilities on event_volunteer_slots.id = event_slot_availabilities.event_volunteer_slot_id').where(event_id: params[:id], event_slot_availabilities: {event_volunteer_slot_id: nil})
+    @event_volunteer_slots = EventVolunteerSlot.joins('LEFT JOIN event_slot_users on event_volunteer_slots.id = event_slot_users.event_volunteer_slot_id').where(event_id: params[:id], event_slot_users: {event_volunteer_slot_id: nil})
     @event_volunteer_slots = @event_volunteer_slots.select{ |slot| current_user.roles.include?(slot.role) }
     @users = User.all
   end
@@ -29,6 +29,7 @@ class EventsController < ApplicationController
     @users = User.all.order(:first_name)
     @venues = Venue.all
     @bands = Band.all
+    @event_volunteer = EventVolunteer.new
   end
 
   # POST /events

@@ -4,7 +4,9 @@
 
 <h1>Event - <%= @event.start_time.strftime("%A: %I:%M%p") %> - <%= @event.end_time.strftime("%I:%M%p")%></h1>
 <%= render 'form', event: @event %>
-<table>
+
+<%= render 'volunteer_slots_form', volunteer_slots: @event_volunteer_slots, users: @users, event_volunteer: @event_volunteer %>
+<!-- <table>
   <thead>
     <tr>
       <th>Role</th>
@@ -26,7 +28,8 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
+<div></div>
 
 <%= link_to 'Index', events_path %>
 <%= link_to 'Show', @event %> |

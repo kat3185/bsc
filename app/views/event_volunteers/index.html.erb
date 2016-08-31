@@ -57,13 +57,13 @@
   </thead>
 
   <tbody>
-    <% @event_slot_availabilities.each do |availability| %>
+    <% @event_slot_users.each do |availability| %>
       <tr>
         <td><%= availability.event_volunteer_slot.start_time.strftime('%B %-d %Y')%></td>
         <td><%= availability.event_volunteer_slot.role.name %></td>
         <td><%= availability.event_volunteer_slot.start_time.strftime('%I:%M %P')%></td>
         <td><%= availability.event_volunteer_slot.end_time.strftime('%I:%M %P')%></td>
-        <td><%= button_to 'Cancel', event_slot_availability_path(availability), method: :delete, class: "warning button"%></td>
+        <td><%= button_to 'Cancel', event_slot_user_path(availability), method: :delete, class: "warning button"%></td>
       </tr>
     <% end %>
   </tbody>

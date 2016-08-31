@@ -5,11 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :event_volunteers
-  has_many :event_volunteer_slots, through: :event_volunteers
+  has_many :event_slot_users
+  has_many :event_volunteer_slots, through: :event_slot_users
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
-  has_many :event_slot_availabilities
-  has_many :event_volunteer_slots, through: :event_slot_availabilities
 
   after_create :add_volunteer_as_role
 

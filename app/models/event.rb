@@ -4,7 +4,8 @@ class Event < ApplicationRecord
   belongs_to :price
 
   has_many :event_volunteer_slots, dependent: :destroy
-  has_many :event_volunteers, through: :event_volunteer_slots
+  has_many :event_slot_users, through: :event_volunteer_slots
+  # has_many :event_volunteers, through: :event_slot_availabilities
 
   # accepts_nested_attributes_for :price, :allow_destroy => true
 

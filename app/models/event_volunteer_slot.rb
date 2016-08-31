@@ -2,17 +2,22 @@ class EventVolunteerSlot < ApplicationRecord
   belongs_to :event
   belongs_to :role
 
-  has_one :event_volunteer, dependent: :destroy
-  has_many :event_volunteer_slot_availabilities
+  # has_one :event_volunteer, dependent: :destroy
+  has_many :event_slot_users, dependent: :destroy
+  has_many :event_volunteers, through: :event_slot_users
 
   def display_volunteer
-    event_volunteer = EventVolunteer.where(event_volunteer_slot_id: id).first
+    event_volunteer = event_volunteers.first
     event_volunteer.nil? ? "Open" : event_volunteer.user.full_name
   end
 
   def volunteer_id
-    event_volunteer = EventVolunteer.where(event_volunteer_slot_id: id).first
+    event_volunteer = event_volunteers.first
     event_volunteer.nil? ? "" : event_volunteer.user.id
+  end
+
+  def available_slots
+    event_slot_users.empty? ? [] : event_slot_users
   end
 
   def self.create_friday_volunteer_slots(event)
@@ -26,8 +31,8 @@ class EventVolunteerSlot < ApplicationRecord
     EventVolunteerSlot.create!(event: event, role: roles["DJ"], start_time: event.hours_after_start(1.75), end_time: event.end_time)
 
     #Instructors
-    EventVolunteerSlot.create!(event: event, role: roles["Instructor"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(1.75))
-    EventVolunteerSlot.create!(event: event, role: roles["Instructor"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(1.75))
+    EventVolunteerSlot.create!(event: event, role: roles["Instructor"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(1.75), notes: "Lead")
+    EventVolunteerSlot.create!(event: event, role: roles["Instructor"], start_time: event.hours_after_start(0.75), end_time: event.hours_after_start(1.75), notes: "Follow")
     #Desk Volunteers
 
     EventVolunteerSlot.create!(event: event, role: roles["Volunteer"], start_time: event.start_time, end_time: event.hours_after_start(1))

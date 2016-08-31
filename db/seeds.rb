@@ -318,6 +318,6 @@ EventVolunteerSlot.create_friday_volunteer_slots(event)
 # EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Follow")
 # EventVolunteerSlot.create!(event: event, role: Role.where(name: "Angel").first, start_time: event.start_time + hours(0.75), end_time: event.start_time + hours(2.25), notes: "Follow")
 puts "Created Event and Event Volunteer Slots"
-
-EventVolunteer.create!(user_id: 1, event_volunteer_slot_id: 1)
+EventSlotUser.create!(user_id: 1, event_volunteer_slot_id: 1)
+EventVolunteer.create!(user_id: 1, event_slot_user_id: 1)
 puts 'Create Event Volunteers!'

@@ -5,8 +5,7 @@ class EventVolunteersController < ApplicationController
   # GET /event_volunteers.json
   def index
     @event_volunteers = EventVolunteer.where(user: current_user)
-    @event_slot_availabilities = current_user.event_slot_availabilities
-
+    @event_slot_users = current_user.event_slot_users
   end
 
   # GET /event_volunteers/1
@@ -26,16 +25,17 @@ class EventVolunteersController < ApplicationController
   # POST /event_volunteers
   # POST /event_volunteers.json
   def create
-    existing_slots = EventVolunteer.where(event_volunteer_slot_id: event_volunteer_params[:event_volunteer_slot_id])
-    existing_slots.each { |slot| slot.destroy } if !existing_slots.empty?
-    @event_volunteer = EventVolunteer.new(event_volunteer_params)
+    parse_event_volunteer_params
+    existing_volunteers = EventVolunteer.where(event_slot_user_id: @event_slot_user_id)
+    existing_volunteers.each { |slot| slot.destroy } if !existing_volunteers.empty?
+    @event_volunteer = EventVolunteer.new(parsed_event_volunteer_params)
     respond_to do |format|
+      binding.pry
       if @event_volunteer.save
-        @volunteer_status = VolunteerStatus.new("Success")
         format.html { redirect_to @event_volunteer, notice: 'Event volunteer was successfully created.' }
         format.json { render json: @volunteer_status }
       else
-        format.html { render :new }
+        format.html { redirect_to @event_volunteer, notice: 'Event volunteer not created.' }
         format.json { render json: @event_volunteer.errors, status: :unprocessable_entity }
       end
     end
@@ -73,7 +73,16 @@ class EventVolunteersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_volunteer_params
-      params.fetch(:event_volunteer, {}).permit(:user_id, :event_volunteer_slot_id)
+      params.fetch(:event_volunteer, {}).permit(:user_id, :event_slot_user_id, :ids)
     end
-    VolunteerStatus = Struct.new(:status)
+
+    def parse_event_volunteer_params
+      parsed_params = event_volunteer_params[:ids].split(",")
+      @user_id = parsed_params[1]
+      @event_slot_user_id = parsed_params[0]
+    end
+
+    def parsed_event_volunteer_params
+      @parsed_event_volunteer_params ||= { event_slot_user_id: @event_slot_user_id, user_id: @user_id }
+    end
 end

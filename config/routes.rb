@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   authenticate :user do
-    resources :event_slot_availabilities
+    resources :event_slot_users
     resources :user_roles
     resources :event_volunteer_slots
     resources :event_volunteers
