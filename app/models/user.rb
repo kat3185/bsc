@@ -4,9 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :event_volunteers
-  has_many :event_slot_users
-  has_many :event_volunteer_slots, through: :event_slot_users
+  has_many :event_volunteers, dependent: :destroy
+  has_many :event_volunteer_slots, through: :event_volunteers
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
 
@@ -17,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def role_names
-    roles.map { |role| role.name }
+    roles.map(&:name)
   end
 
   def add_volunteer_as_role

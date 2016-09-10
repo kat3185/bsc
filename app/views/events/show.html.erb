@@ -42,7 +42,7 @@
         <td><%= slot.start_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.end_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.notes if !slot.notes.nil? %></td>
-        <td><%= button_to 'Sign up', event_slot_users_path, method: :post, class: "button", params: { event_slot_user: {event_volunteer_slot_id: slot.id} } %></td>
+        <td><%= button_to 'Sign up', event_volunteers_path, method: :post, class: "button", params: { event_volunteer: {event_volunteer_slot_id: slot.id} } %></td>
 
       </tr>
     <% end %>

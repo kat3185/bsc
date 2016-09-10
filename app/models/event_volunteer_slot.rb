@@ -5,13 +5,13 @@ class EventVolunteerSlot < ApplicationRecord
   has_many :event_volunteers, dependent: :destroy
 
   def display_volunteer
-    event_volunteer = event_volunteers.first
-    event_volunteer.nil? ? "Open" : event_volunteer.user.full_name
+    event_volunteer = event_volunteers.where(scheduled: true)
+    event_volunteer.empty? ? "Open" : event_volunteer.user.full_name
   end
 
   def volunteer_id
-    event_volunteer = event_volunteers.first
-    event_volunteer.nil? ? "" : event_volunteer.user.id
+    event_volunteer = event_volunteers.where(scheduled: true)
+    event_volunteer.empty? ? "" : event_volunteer.user.id
   end
 
   def available_slots
