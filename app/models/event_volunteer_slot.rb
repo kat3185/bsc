@@ -2,9 +2,7 @@ class EventVolunteerSlot < ApplicationRecord
   belongs_to :event
   belongs_to :role
 
-  # has_one :event_volunteer, dependent: :destroy
-  has_many :event_slot_users, dependent: :destroy
-  has_many :event_volunteers, through: :event_slot_users
+  has_many :event_volunteers, dependent: :destroy
 
   def display_volunteer
     event_volunteer = event_volunteers.first

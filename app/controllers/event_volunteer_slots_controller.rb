@@ -1,6 +1,5 @@
 class EventVolunteerSlotsController < ApplicationController
   before_action :set_event_volunteer_slot, only: [:show, :edit, :update, :destroy]
-  binding.pry
   # GET /event_volunteer_slots
   # GET /event_volunteer_slots.json
   def index
