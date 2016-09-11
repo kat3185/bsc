@@ -13,9 +13,9 @@
   <tbody>
     <% volunteer_slots.each do |slot| %>
       <tr>
-        <%= form_for(event_volunteer) do |f| %>
+        <%= form_for(slot) do |f| %>
         <td><%= slot.role.name %></td>
-        <td><%= f.collection_select :ids, slot.available_slots, :ids, :full_name, {include_blank: true, selected: slot.volunteer_id}, {class: "event-volunteer", id: slot.id} %></td>
+        <td><%= f.collection_select :event_volunteer_id, slot.available_slots, :id, :full_name, {include_blank: true, selected: slot.volunteer_id}, {class: "event-volunteer", id: slot.id} %></td>
         <td><%= slot.start_time.strftime("%I:%M%p")  %></td>
         <td><%= slot.end_time.strftime("%I:%M%p")  %></td>
         <td><%= f.text_field :notes, value: slot.notes %></td>

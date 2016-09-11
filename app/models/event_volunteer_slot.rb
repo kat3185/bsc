@@ -6,16 +6,16 @@ class EventVolunteerSlot < ApplicationRecord
 
   def display_volunteer
     event_volunteer = event_volunteers.where(scheduled: true)
-    event_volunteer.empty? ? "Open" : event_volunteer.user.full_name
+    event_volunteer.empty? ? "Open" : event_volunteer.first.user.full_name
   end
 
   def volunteer_id
     event_volunteer = event_volunteers.where(scheduled: true)
-    event_volunteer.empty? ? "" : event_volunteer.user.id
+    event_volunteer.empty? ? "" : event_volunteer.first.id
   end
 
   def available_slots
-    event_slot_users.empty? ? [] : event_slot_users
+    event_volunteers.empty? ? [] : event_volunteers
   end
 
   def self.create_friday_volunteer_slots(event)

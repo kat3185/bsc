@@ -1,6 +1,5 @@
 class EventVolunteersController < ApplicationController
   before_action :set_event_volunteer, only: [:show, :edit, :update, :destroy]
-
   # GET /event_volunteers
   # GET /event_volunteers.json
   def index

@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :user_roles
     resources :event_volunteer_slots
-    resources :event_volunteers
-    resources :events
+    resources :event_volunteers, except: [:update]
+    resources :events do
+      resources :event_volunteers, only: [:update]
+    end
     resources :prices
     resources :roles
     resources :bands

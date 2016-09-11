@@ -1,5 +1,5 @@
 class EventVolunteerSlotsController < ApplicationController
-  before_action :set_event_volunteer_slot, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_volunteer_slot, only: [:show, :edit, :destroy]
   # GET /event_volunteer_slots
   # GET /event_volunteer_slots.json
   def index
@@ -39,13 +39,14 @@ class EventVolunteerSlotsController < ApplicationController
   # PATCH/PUT /event_volunteer_slots/1
   # PATCH/PUT /event_volunteer_slots/1.json
   def update
+    set_event_volunteer
     respond_to do |format|
-      if @event_volunteer_slot.update(event_volunteer_slot_params)
-        format.html { redirect_to @event_volunteer_slot, notice: 'Event volunteer slot was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event_volunteer_slot }
+      if @event_volunteer.schedule!
+        format.html { redirect_to edit_event_path(@event_volunteer.event), notice: 'Event volunteer slot was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event_volunteer }
       else
-        format.html { render :edit }
-        format.json { render json: @event_volunteer_slot.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_event_path(@event_volunteer.event) }
+        format.json { render json: @event_volunteer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,8 +67,24 @@ class EventVolunteerSlotsController < ApplicationController
       @event_volunteer_slot = EventVolunteerSlot.find(params[:id])
     end
 
+    def set_event_volunteer
+      @event_volunteer = EventVolunteer.find_if_exists(event_volunteer_id, event_volunteer_slot_id)
+    end
+
+    def event_volunteer_id
+      event_volunteer_params[:event_volunteer_id]
+    end
+
+    def event_volunteer_slot_id
+      params[:id]
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_volunteer_slot_params
       params.fetch(:event_volunteer_slot, {}).permit(:user_id)
+    end
+
+    def event_volunteer_params
+      params.fetch(:event_volunteer_slot, {}).permit(:event_volunteer_id)
     end
 end
