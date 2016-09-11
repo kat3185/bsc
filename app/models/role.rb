@@ -17,4 +17,12 @@ class Role < ApplicationRecord
   def self.volunteer
     Role.where(name: "Volunteer").first
   end
+
+  def self.house_manager
+    Role.where(name: "House Manager").first
+  end
+
+  def self.board_member
+    Role.where(name: "Board Member").first
+  end
 end

@@ -44,14 +44,15 @@ ActiveRecord::Schema.define(version: 20160830190214) do
 
   create_table "events", force: :cascade do |t|
     t.text     "notes"
-    t.datetime "start_time",                         null: false
+    t.datetime "start_time",                            null: false
     t.datetime "end_time"
-    t.boolean  "weekly_friday_dance", default: true, null: false
+    t.boolean  "weekly_friday_dance", default: true,    null: false
+    t.string   "title",               default: "Dance"
     t.integer  "venue_id"
     t.integer  "band_id"
-    t.integer  "price_id",            default: 1,    null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "price_id",            default: 1,       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "prices", force: :cascade do |t|

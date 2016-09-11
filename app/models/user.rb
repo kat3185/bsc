@@ -26,4 +26,9 @@ class User < ApplicationRecord
   def roles_ordered_by_name
     roles.sort { |a,b| a.name.downcase <=> b.name.downcase }
   end
+
+  def admin?
+    user_roles.any? { |user_role| user_role.role == Role.house_manager } ||
+    user_roles.any? { |user_role| user_role.role == Role.board_member } 
+  end
 end
