@@ -1,0 +1,20 @@
+<h1>This page needs ajax</h1>
+<h3> The redirect in the controllers are not what I want </h3>
+<div class="callout">House Manager Signups</div>
+<div class="small-12 columns">
+  <% @house_manager_slots.each do |slot| %>
+  <div class="callout success row">
+      <div class="callout secondary columns text-center"><%= slot.start_time.strftime('%A, %b %e, %Y') %><br><%= slot.start_time.strftime("%l:%M%p") %> - <%= slot.end_time.strftime("%l:%M%p")  %></div>
+      <% if slot.display_volunteers == "Open" %>
+      <div class="callout secondary columns text-center"><%= button_to 'Sign up', event_volunteers_path, method: :post, class: "success button", params: { event_volunteer: {event_volunteer_slot_id: slot.id, scheduled: true} } %></div>
+      <%else%>
+      <div class="callout secondary columns text-center">Names: <br><%= slot.display_volunteers %></div>
+        <% if !slot.event.weekly_friday_dance %>
+        <div class="callout secondary columns text-center"><%= button_to 'Sign up', event_volunteers_path, method: :post, class: "success button", params: { event_volunteer: {event_volunteer_slot_id: slot.id, scheduled: true} } %></div>
+        <% end %>
+      <% end %>
+    <div class="callout secondary columns text-center"><%= button_to 'Delete This Week\'s Signups', event_volunteer_slot_path(slot), method: :delete, class: "alert button", params: { event_volunteer: {event_volunteer_slot_id: slot.id} } %></div>
+  </div>
+  <% end %>
+</div>
+<div class="callout secondary medium-4 columns text-center"></div>

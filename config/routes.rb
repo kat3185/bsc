@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     resources :event_volunteers, except: [:update]
     resources :events do
       resources :event_volunteers, only: [:update]
+      collection do
+        get :house_manager_signups
+      end
+      member do
+        post :house_manager_signup
+      end
     end
     resources :prices
     resources :roles

@@ -78,6 +78,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def house_manager_signups
+    @house_manager_slots = EventVolunteerSlot.where(role: Role.house_manager)
+    @event_volunteer = EventVolunteer.new
+  end
+
+  def house_manager_signup
+    binding.pry
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

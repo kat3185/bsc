@@ -71,6 +71,6 @@ class EventVolunteersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_volunteer_params
-      params.fetch(:event_volunteer, {}).permit(:user_id, :event_volunteer_slot_id, :ids)
+      params.fetch(:event_volunteer, {}).permit(:user_id, :event_volunteer_slot_id, :scheduled)
     end
 end
