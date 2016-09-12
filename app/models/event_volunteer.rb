@@ -30,8 +30,6 @@ class EventVolunteer < ApplicationRecord
   end
 
   def schedule!
-    slot_volunteers = EventVolunteer.where(event_volunteer_slot_id: self.event_volunteer_slot_id, scheduled: true)
-    slot_volunteers.each { |volunteer| volunteer.update(scheduled: false) }
     self.update(scheduled: true) if !self.id.nil?
   end
 end

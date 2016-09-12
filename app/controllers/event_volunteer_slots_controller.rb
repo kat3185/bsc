@@ -54,9 +54,9 @@ class EventVolunteerSlotsController < ApplicationController
   # DELETE /event_volunteer_slots/1
   # DELETE /event_volunteer_slots/1.json
   def destroy
-    @event_volunteer_slot.destroy
+    @event_volunteer_slot.unschedule_event_volunteers
     respond_to do |format|
-      format.html { redirect_to event_volunteer_slots_url, notice: 'Event volunteer slot was successfully destroyed.' }
+      format.html { redirect_to edit_event_path(@event_volunteer_slot.event), notice: 'Event volunteer slot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

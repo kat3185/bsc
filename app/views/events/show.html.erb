@@ -27,11 +27,24 @@
     </tr>
   </tbody>
 </table>
-<table>
+
+<div class="show-for-small-only small-12 columns">
+  <% @event_volunteer_slots.each do |slot| %>
+  <div class="callout primary row">
+      <div class="callout secondary medium-2 columns text-center">Role: <br><%= slot.role.name %></div>
+      <div class="callout secondary medium-2 columns text-center"><%= slot.start_time.strftime("%l:%M%p") %> - <%= slot.end_time.strftime("%l:%M%p")  %></div>
+      <div class="callout secondary medium-2 columns text-center">Assigned: <br><%= slot.display_volunteers %></div>
+      <% if slot.has_notes? %><div class="callout secondary medium-2 columns text-center">Notes: <br><%= slot.notes %></div> <%end%>
+      <div class="callout secondary medium-4 columns text-center"><%= button_to 'Sign up', event_volunteers_path, method: :post, class: "button", params: { event_volunteer: {event_volunteer_slot_id: slot.id} } %></div>
+  </div>
+  <% end %>
+</div>
+
+<table class="hide-for-small-only">
   <thead>
     <tr>
       <th>Role</th>
-      <th>Name</th>
+      <th>Volunteer</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Notes</th>
@@ -43,9 +56,9 @@
     <% @event_volunteer_slots.each do |slot| %>
       <tr>
         <td><%= slot.role.name %></td>
-        <td><%= slot.display_volunteer %></td>
-        <td><%= slot.start_time.strftime("%I:%M%p")  %></td>
-        <td><%= slot.end_time.strftime("%I:%M%p")  %></td>
+        <td><%= slot.display_volunteers %></td>
+        <td><%= slot.start_time.strftime("%l:%M%p")  %></td>
+        <td><%= slot.end_time.strftime("%l:%M%p")  %></td>
         <td><%= slot.notes if !slot.notes.nil? %></td>
         <td><%= button_to 'Sign up', event_volunteers_path, method: :post, class: "button", params: { event_volunteer: {event_volunteer_slot_id: slot.id} } %></td>
 

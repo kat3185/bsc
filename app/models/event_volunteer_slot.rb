@@ -4,9 +4,9 @@ class EventVolunteerSlot < ApplicationRecord
 
   has_many :event_volunteers, dependent: :destroy
 
-  def display_volunteer
+  def display_volunteers
     event_volunteer = event_volunteers.where(scheduled: true)
-    event_volunteer.empty? ? "Open" : event_volunteer.first.user.full_name
+    event_volunteer.empty? ? "Open" : event_volunteer.map(&:full_name).join(', ')
   end
 
   def volunteer_id
@@ -16,6 +16,17 @@ class EventVolunteerSlot < ApplicationRecord
 
   def available_slots
     event_volunteers.empty? ? [] : event_volunteers
+  end
+
+  def has_notes?
+    !self.notes.nil?
+  end
+
+  def unschedule_event_volunteers
+    self.event_volunteers.where(scheduled: true).each do |volunteer|
+      volunteer.scheduled = false
+      volunteer.save
+    end
   end
 
   def self.create_friday_volunteer_slots(event)

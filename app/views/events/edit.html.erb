@@ -1,8 +1,9 @@
-<h1>Editing Event</h1>
-
 <p id="notice"><%= notice %></p>
-
-<h1>Event - <%= @event.start_time.strftime("%A: %I:%M%p") %> - <%= @event.end_time.strftime("%I:%M%p")%></h1>
+<div class="success callout text-center">
+  <h1>Edit <%= @event.title %></h1>
+  <h4><%= @event.start_time.strftime('%A, %b %e, %Y') %></h4>
+  <%= @event.start_time.strftime("%I:%M%p") %> - <%= @event.end_time.strftime("%I:%M%p")%>
+</div>
 <%= render 'form', event: @event %>
 
 <%= render 'volunteer_slots_form', volunteer_slots: @event_volunteer_slots, users: @users, event_volunteer: @event_volunteer %>
